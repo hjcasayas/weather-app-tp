@@ -26,7 +26,6 @@ export function SearchForm() {
         />
         <SubmitButton></SubmitButton>
       </form>
-      <></>
     </>
   );
 }

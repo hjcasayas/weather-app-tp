@@ -21,7 +21,7 @@ const searchLocationSchema = z.object({
 export async function getGoordinateByLocationAction(
   prevState: IGetGoordinateByLocationState,
   formData: FormData
-): Promise<IGetGoordinateByLocationState | undefined> {
+): Promise<IGetGoordinateByLocationState> {
   const location = formData.get('location');
   const parsedData = searchLocationSchema.safeParse({ location });
 
