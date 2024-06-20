@@ -27,7 +27,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "./vitest.setup.ts"
+    "./vitest.setup.ts",
+    "./libs/**/*.ts",
+    "./libs/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
