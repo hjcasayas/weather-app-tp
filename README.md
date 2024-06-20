@@ -1,5 +1,6 @@
-This is a weather app project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-This app is deployed in vercel: https://weather-app-tp.vercel.app/. 
+# Weather App
+
+This is a weather app using [OpenWeather API](https://openweathermap.org/) for its data.
 
 ## Running Locally
 
@@ -10,4 +11,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Deployed in Vercel
+https://weather-app-tp.vercel.app/
 
