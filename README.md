@@ -1,6 +1,7 @@
 This is a weather app project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This app is deployed in vercel: https://weather-app-tp.vercel.app/. 
 
-## Getting Started
+## Running Locally
 
 First, run the development server:
 
