@@ -4,11 +4,11 @@ import { IUseCase } from './use-case.interface';
 import { Location } from '../domain-objects/location.domain-object';
 
 export class GetCoordidateByLocationUseCase
-  implements IUseCase<string, Promise<Location>>
+  implements IUseCase<string, Promise<Location[]>>
 {
   constructor(private geoCodingRepository: IGeoCodingRepository) {}
 
-  execute = async (location: string): Promise<Location> => {
-    return await this.geoCodingRepository.getCoordidateByLocation(location);
+  execute = async (location: string): Promise<Location[]> => {
+    return await this.geoCodingRepository.getLocations(location);
   };
 }

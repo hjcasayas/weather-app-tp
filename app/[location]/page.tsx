@@ -2,7 +2,7 @@ import { getWeatherInfoByCoordinateAction } from '@/actions/get-weather-info-by-
 import { BackButton } from '@/components/back-button.component';
 import { WeatherInfo } from '@/components/weather-info.component';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 interface LocationProps {
   params: {
@@ -24,7 +24,7 @@ export default async function Location({
   });
 
   if (weatherInfo == null) {
-    notFound();
+    redirect('/');
   }
 
   return (
