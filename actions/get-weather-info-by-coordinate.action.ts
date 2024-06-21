@@ -6,9 +6,13 @@ import { OpenWeatherWeatherForcastRepo } from '@/libs/repositories/weather-forec
 import { GetWeatherInfoByCoordinateUseCase } from '@/libs/use-cases/get-weather-information-by-coordinate.use-case';
 
 export async function getWeatherInfoByCoordinateAction(coordinate: Coordinate) {
-  const useCase = new GetWeatherInfoByCoordinateUseCase(
-    new OpenWeatherWeatherForcastRepo(openWeatherWeatherForecastAxiosInstance)
-  );
+  try {
+    const useCase = new GetWeatherInfoByCoordinateUseCase(
+      new OpenWeatherWeatherForcastRepo(openWeatherWeatherForecastAxiosInstance)
+    );
 
-  return await useCase.execute(coordinate);
+    return await useCase.execute(coordinate);
+  } catch (error) {
+    return null;
+  }
 }

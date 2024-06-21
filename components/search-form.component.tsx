@@ -1,11 +1,11 @@
 'use client';
 
-import { SubmitButton } from './submit-button.component';
+import { SearchButton } from './submit-button.component';
 import { useFormState } from 'react-dom';
 import { getGoordinateByLocationAction } from '@/actions/get-coordinate-by-location.action';
 
 export function SearchForm() {
-  const [state, formAction] = useFormState(getGoordinateByLocationAction, {
+  const [formState, formAction] = useFormState(getGoordinateByLocationAction, {
     errors: {},
   });
 
@@ -22,10 +22,20 @@ export function SearchForm() {
           autoComplete="location"
           required
           className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-          placeholder="Search location"
+          placeholder="City name"
         />
-        <SubmitButton></SubmitButton>
+        <SearchButton></SearchButton>
       </form>
+      {formState.errors._form != null ? (
+        <span className="my-2 rounded border border-red-400 bg-red-200 p-1">
+          {formState.errors._form}
+        </span>
+      ) : null}
+      {formState.errors.location != null ? (
+        <span className="my-2 rounded border border-red-400 bg-red-200 p-1">
+          {formState.errors.location.join(', ')}
+        </span>
+      ) : null}
     </>
   );
 }

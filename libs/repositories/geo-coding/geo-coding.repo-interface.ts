@@ -1,5 +1,5 @@
-import { Coordinate } from '../../domain-objects/coordinate.domain-object';
+import { Location } from '../../domain-objects/location.domain-object';
 
 export interface IGeoCodingRepository {
-  getCoordidateByLocation: (location: string) => Promise<Coordinate>;
+  getCoordidateByLocation: (location: string) => Promise<Location>;
 }

@@ -1,5 +1,8 @@
 import { getWeatherInfoByCoordinateAction } from '@/actions/get-weather-info-by-coordinate.action';
+import { BackButton } from '@/components/back-button.component';
 import { WeatherInfo } from '@/components/weather-info.component';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 interface LocationProps {
   params: {
@@ -20,6 +23,10 @@ export default async function Location({
     longitude: +lon,
   });
 
+  if (weatherInfo == null) {
+    notFound();
+  }
+
   return (
     <WeatherInfo>
       <WeatherInfo.Location>{decodeURI(location)}</WeatherInfo.Location>
@@ -27,6 +34,9 @@ export default async function Location({
         {weatherInfo.tempInFahrenheit}
       </WeatherInfo.Temperature>
       <WeatherInfo.Weather>{weatherInfo.weather}</WeatherInfo.Weather>
+      <Link href="/">
+        <BackButton>Search again</BackButton>
+      </Link>
     </WeatherInfo>
   );
 }

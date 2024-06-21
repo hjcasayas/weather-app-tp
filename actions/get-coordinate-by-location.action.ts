@@ -1,6 +1,7 @@
 'use server';
 
 import { Coordinate } from '@/libs/domain-objects/coordinate.domain-object';
+import { Location } from '@/libs/domain-objects/location.domain-object';
 import { openWeatherGeoCodingAxiosInstance } from '@/libs/repositories/geo-coding/open-weather.axios-instance';
 import { OpenWeatherGeoCodingRepo } from '@/libs/repositories/geo-coding/open-weather.repo-impl';
 import { GetCoordidateByLocationUseCase } from '@/libs/use-cases/get-coordinate-by-location.use-case';
@@ -30,12 +31,22 @@ export async function getGoordinateByLocationAction(
       errors: parsedData.error.flatten().fieldErrors,
     };
   }
-  let coordinates: Coordinate;
+  let locationWithCoordinate: Location;
   try {
-    coordinates = await new GetCoordidateByLocationUseCase(
+    locationWithCoordinate = await new GetCoordidateByLocationUseCase(
       new OpenWeatherGeoCodingRepo(openWeatherGeoCodingAxiosInstance)
     ).execute(parsedData.data.location);
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      if (error.message !== '') {
+        return {
+          errors: {
+            _form: [error.message],
+          },
+        };
+      }
+    }
+
     return {
       errors: {
         _form: ['Something went wrong!'],
@@ -44,6 +55,6 @@ export async function getGoordinateByLocationAction(
   }
 
   redirect(
-    `/${location}?lat=${coordinates.latitude}&lon=${coordinates.longitude}`
+    `/${locationWithCoordinate.name}?lat=${locationWithCoordinate.coordinate.latitude}&lon=${locationWithCoordinate.coordinate.longitude}`
   );
 }

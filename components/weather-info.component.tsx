@@ -51,5 +51,5 @@ interface WeatherProps {
 }
 
 function Weather({ children }: WeatherProps) {
-  return <p className="mt-6 text-base leading-5 text-gray-600">{children}</p>;
+  return <p className="my-6 text-base leading-5 text-gray-600">{children}</p>;
 }
