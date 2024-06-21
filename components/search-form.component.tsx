@@ -1,7 +1,7 @@
 'use client';
 
+import { useLocations } from '@/hooks/use-locations.hook';
 import { Location } from '@/libs/domain-objects/location.domain-object';
-import { error } from 'console';
 import Link from 'next/link';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 
@@ -10,32 +10,9 @@ interface SearchFormProps {
 }
 
 export function SearchForm({ searchLocations }: SearchFormProps) {
-  const [search, setSearch] = useState<string>('');
-  const [locations, setLocations] = useState<Location[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string | undefined | null>(
-    null
-  );
-
-  useEffect(() => {
-    setErrorMessage(null);
-    if (search.trim() !== '') {
-      const setTimeoutId = setTimeout(async () => {
-        try {
-          const searchedLocations = await searchLocations(search);
-          setLocations(searchedLocations);
-        } catch (error) {
-          setLocations([]);
-          setErrorMessage('No location found.');
-        }
-      }, 1000);
-
-      return () => {
-        clearTimeout(setTimeoutId);
-      };
-    } else {
-      setLocations([]);
-    }
-  }, [search]);
+  const { setSearch, locations, errorMessage } = useLocations({
+    searchLocations,
+  });
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
