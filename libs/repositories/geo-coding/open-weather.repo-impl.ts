@@ -6,7 +6,7 @@ import { Location } from '@/libs/domain-objects/location.domain-object';
 export class OpenWeatherGeoCodingRepo implements IGeoCodingRepository {
   constructor(private axiosInstance: AxiosInstance) {}
 
-  getCoordidateByLocation = async (location: string): Promise<Location> => {
+  getLocations = async (location: string): Promise<Location[]> => {
     try {
       const response = await this.axiosInstance.get<DirectDTO[]>('/direct', {
         params: {
@@ -18,18 +18,15 @@ export class OpenWeatherGeoCodingRepo implements IGeoCodingRepository {
       if (data == null || data.length <= 0) {
         throw new Error('No weather information found');
       }
-      const locationData = data.find((d) => {
-        return d.name.toLowerCase().includes(location.toLowerCase());
+      const locations: Location[] = data.map((location) => {
+        return {
+          name: location.name,
+          coordinate: { latitude: location.lat, longitude: location.lon },
+          country: location.country,
+        };
       });
 
-      if (locationData == null) {
-        throw new Error('No weather information found');
-      }
-
-      return {
-        name: locationData.name,
-        coordinate: { latitude: locationData.lat, longitude: locationData.lon },
-      };
+      return locations;
     } catch (error) {
       console.log({ error });
       throw error;

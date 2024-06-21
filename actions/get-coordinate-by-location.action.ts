@@ -31,7 +31,7 @@ export async function getGoordinateByLocationAction(
       errors: parsedData.error.flatten().fieldErrors,
     };
   }
-  let locationWithCoordinate: Location;
+  let locationWithCoordinate: Location[];
   try {
     locationWithCoordinate = await new GetCoordidateByLocationUseCase(
       new OpenWeatherGeoCodingRepo(openWeatherGeoCodingAxiosInstance)
@@ -54,7 +54,8 @@ export async function getGoordinateByLocationAction(
     };
   }
 
-  redirect(
-    `/${locationWithCoordinate.name}?lat=${locationWithCoordinate.coordinate.latitude}&lon=${locationWithCoordinate.coordinate.longitude}`
-  );
+  redirect('/');
+  // redirect(
+  //   `/${locationWithCoordinate.name}?lat=${locationWithCoordinate.coordinate.latitude}&lon=${locationWithCoordinate.coordinate.longitude}`
+  // );
 }
