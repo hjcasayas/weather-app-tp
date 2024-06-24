@@ -47,6 +47,10 @@ describe('Weather Info Card', () => {
     render(Component);
     const locationText = await screen.findByText(location);
     expect(locationText).toBeVisible();
+    const temperatureText = await screen.findByText(/90/i);
+    expect(temperatureText).toBeVisible();
+    const weatherText = await screen.findByText('Clouds');
+    expect(weatherText).toBeVisible();
     expect(calledCount).toBe(1);
   });
 });
