@@ -8,7 +8,10 @@ interface HeroProps extends HTMLAttributes<HTMLDivElement> {
 export function Hero({ children, className, ...restProps }: HeroProps) {
   return (
     <div
-      className={cn('mx-auto flex max-w-xl flex-col lg:max-w-lg', className)}
+      className={cn(
+        'mx-auto flex max-w-xl flex-col px-6 lg:max-w-lg',
+        className
+      )}
       {...restProps}
     >
       {children}
