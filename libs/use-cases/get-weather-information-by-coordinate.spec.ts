@@ -9,10 +9,6 @@ import { WeatherInfo } from '../domain-objects/weather-info.domain-object';
 import { GetWeatherInfoByCoordinateUseCase } from './get-weather-information-by-coordinate.use-case';
 
 describe('Get Weather Information By Coordinate', () => {
-  test('True', () => {
-    expect(true).toBeTruthy();
-  });
-
   test('getWeatherInfoByCoordinate method is called with correct received arguments', () => {
     let calledCount = 0;
     let coordinateInitial: Coordinate = { latitude: 0, longitude: 0 };
