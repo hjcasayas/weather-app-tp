@@ -2,8 +2,8 @@
 
 import { useLocations } from '@/hooks/use-locations.hook';
 import { Location } from '@/libs/domain-objects/location.domain-object';
-import Link from 'next/link';
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { ChangeEventHandler } from 'react';
+import { LocationList } from './location-list.component';
 
 interface SearchFormProps {
   searchLocations: (location: string) => Promise<Location[]>;
@@ -41,22 +41,7 @@ export function SearchForm({ searchLocations }: SearchFormProps) {
             </p>
           </div>
         ) : null}
-        {locations != null && locations.length > 0 ? (
-          <div className="mt-2 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <ul className="flex flex-col gap-2 py-1">
-              {locations.map((location) => (
-                <Link
-                  key={`${location.coordinate.latitude}${location.coordinate.longitude}`}
-                  href={`/${location.name}?lat=${location.coordinate.latitude}&lon=${location.coordinate.longitude}`}
-                >
-                  <li className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
-                    <span>{`${location.name}, ${location.country}, lat: ${location.coordinate.latitude}, lon: ${location.coordinate.longitude}`}</span>
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+        <LocationList locations={locations}></LocationList>
       </div>
     </>
   );
